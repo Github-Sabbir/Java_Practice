@@ -1,291 +1,217 @@
-# PROFESSIONAL RETAIL POS APPLICATION — MASTER BUILD PROMPT
+# RETAIL POS SYSTEM — MASTER DEVELOPMENT PROMPT
 
-I want you to help me BUILD a complete professional POS (Point of Sale) application for a retail shop.
+You are my senior Laravel/PHP POS software engineer, database architect, UI/UX designer, security engineer, QA tester, and code reviewer.
 
-I will manage the project using Git/GitHub and I will use your help throughout development.
+I am building a professional **Retail Point of Sale (POS) System** for a real shop.
 
-IMPORTANT: Do not only give me an architecture or tutorial. I want you to ACTUALLY BUILD the application with complete working code, step by step.
-
-Later, I may upload the complete project as a ZIP file. When I do that, you must audit the entire project against this exact specification and identify every missing, incomplete, broken, insecure, or incorrectly implemented feature.
+The project must be developed carefully, professionally, securely, and incrementally.
 
 ---
 
 # 1. TECHNOLOGY STACK
 
-Use this stack:
+Use:
 
-* PHP
-* Laravel
-* SQLite
-* HTML
-* CSS
+* PHP 8.2+
+* Laravel 12+
+* MySQL
+* HTML5
+* CSS3
 * Vanilla JavaScript
-* Blade templates
+* Blade
+* Laravel Eloquent ORM
+* Laravel migrations
+* Laravel seeders
+* Laravel Form Requests
+* Laravel Policies/Gates
+* Laravel middleware
+* Laravel database transactions
 
-Do NOT use:
+Development environment:
 
-* React
-* Vue
-* Angular
-* Node.js
-* Next.js
-* MongoDB
-* Firebase
-* unnecessary external frameworks
+* XAMPP
+* Apache
+* MySQL
+* Composer
+* Git/GitHub
 
-Bootstrap/Tailwind should not be required unless there is a very strong reason. Prefer custom CSS and Vanilla JavaScript.
+Do NOT use React, Vue, Angular, Node backend, MongoDB, Firebase, or unnecessary external frameworks.
 
-The application must work locally on Windows.
-
----
-
-# 2. DEVELOPMENT STYLE
-
-I will use Git.
-
-Therefore:
-
-* Keep the project structure clean.
-* Make changes in logical stages.
-* Do not randomly rewrite working files.
-* Do not remove existing features when adding new ones.
-* Keep database migrations organized.
-* Keep controllers/models/services organized.
-* Keep JavaScript and CSS maintainable.
-* Make every feature Git-friendly.
-
-For every development stage:
-
-1. Explain what you are building.
-2. Show the files that will be created/modified.
-3. Give complete code.
-4. Give exact commands.
-5. Explain how I can test it.
-6. Do not use fake placeholder code.
-7. Do not write "same as above".
-8. Do not write "// rest of code".
-9. Do not silently remove previous functionality.
-
-If the response becomes too long, continue in the next response from the exact point where you stopped.
+Use JavaScript libraries only when genuinely useful.
 
 ---
 
-# 3. MAIN GOAL
+# 2. MAIN GOAL
 
-Build a modern, professional, highly animated, fast and fully responsive retail POS application.
-
-It must feel like real commercial POS software, not a basic student CRUD project.
-
-The application must prioritize:
-
-* Speed
-* Easy operation
-* Minimal typing
-* Barcode-first workflow
-* Simple navigation
-* Professional UI
-* Security
-* Accurate stock
-* Accurate financial calculations
-* Responsive design
-
----
-
-# 4. RESPONSIVE DESIGN
-
-The application MUST work properly on:
+Build a complete professional Retail POS system that works on:
 
 * Desktop PC
 * Laptop
 * Tablet
-* Mobile phone
+* Mobile
 
-Do not simply shrink the desktop interface.
+The interface must be:
 
-Create proper responsive layouts.
-
-### Desktop
-
-* Full sidebar
-* Dashboard cards
-* Large POS layout
-* Product grid
-* Cart panel
-
-### Tablet
-
-* Responsive columns
-* Touch-friendly buttons
-* Collapsible navigation
-
-### Mobile
-
-* Hamburger menu
-* Mobile-friendly POS
-* Responsive cart
-* Touch-friendly controls
-* Responsive tables
-* Responsive forms
-* Responsive reports
+* Fast
+* Responsive
+* Touch-friendly
+* Modern
+* Professional
+* Easy for a shop cashier to operate
+* Barcode-first
+* Minimal typing
+* Highly animated but not annoying
+* Lightweight enough for normal shop computers
 
 ---
 
-# 5. ANIMATED UI
+# 3. UI / UX
 
-The application must be highly animated but professional.
+Create a modern POS interface.
 
-Use smooth animations for:
+Required:
+
+* Dashboard
+* Sidebar
+* Top navigation
+* Cards
+* Tables
+* Product cards
+* POS cart
+* Modals
+* Dropdowns
+* Forms
+* Notifications
+* Loading states
+* Empty states
+* Error states
+* Confirmation dialogs
+
+Animations should exist for:
 
 * Login
-* Dashboard
+* Page transitions
 * Sidebar
 * Buttons
 * Cards
 * Product cards
-* Cart
+* Cart items
 * Modals
 * Dropdowns
-* Notifications
-* Page transitions
-* Loading states
-* Charts
+* Toast notifications
 * Success messages
 * Error messages
+* Loading indicators
+* Charts
 
-Use animations carefully so the POS remains fast.
-
-Do NOT create unnecessary animations that slow down normal shop operations.
+Animations must remain professional and fast.
 
 ---
 
-# 6. THEME SYSTEM
+# 4. THEME
 
-Create a proper theme system.
+Provide:
 
-At minimum:
+* Light mode
+* Dark mode
 
-* Light Mode
-* Dark Mode
-
-The selected theme must persist after closing/reopening the application.
+Theme preference must persist after page refresh.
 
 Use CSS variables where appropriate.
 
-Theme must apply to:
+---
+
+# 5. AUTHENTICATION
+
+Implement secure authentication.
+
+Required:
 
 * Login
-* Dashboard
-* Sidebar
-* POS
-* Products
-* Tables
-* Forms
-* Modals
-* Reports
-* Settings
-* Notifications
-* Invoice preview
-
----
-
-# 7. SECURITY
-
-Security is very important.
-
-Use Laravel's proper security mechanisms.
-
-Implement:
-
-* Secure authentication
+* Logout
 * Password hashing
 * Session security
+* Remember-me if appropriate
+* Login validation
+* Login rate limiting/protection
+* Unauthorized access protection
+* Session regeneration
 * CSRF protection
-* Server-side validation
-* Authorization
-* Role-based access control
-* Permission checks
-* Route protection
-* Input validation
-* Safe database queries
-* Proper error handling
-* Login rate limiting/protection where appropriate
-* Activity logging
 
-NEVER store passwords as plain text.
-
-NEVER rely only on JavaScript for permission/security.
-
-All sensitive actions must be checked on the Laravel backend.
+Never store plain-text passwords.
 
 ---
 
-# 8. ADMIN AND CASHIER SYSTEM
+# 6. USER SYSTEM
 
-Create a proper user/role/permission system.
+There will be:
 
-## ADMIN
+## Admin
 
 Admin can:
 
-* Add cashier
+* Create cashier
 * Edit cashier
-* Delete cashier
 * Disable cashier
 * Enable cashier
-* Reset cashier password
-* View cashier information
+* Delete/archive cashier
+* Reset password
+* View users
 * Manage permissions
 * View activity logs
 * Manage products
 * Manage categories
 * Manage brands
-* Manage barcode
 * Manage purchases
 * Manage sales
-* Manage returns
 * Manage customers
 * Manage suppliers
 * Manage expenses
-* View reports
+* Manage reports
 * Manage settings
 * Backup database
 * Restore database
 
-## CASHIER
+## Cashier
 
 Cashier permissions must be configurable by Admin.
 
-Example:
+Examples:
 
-Allowed:
+* POS access
+* Product search
+* Customer access
+* Sale access
+* Hold bill
+* Return permission
+* Discount permission
+* View reports
+* Print invoice
 
-* POS
-* New Sale
-* Customer
-* Invoice
-* Sales History
+A cashier must NEVER bypass permission restrictions by manually entering URLs.
 
-Restricted:
-
-* Delete Product
-* Delete User
-* Backup
-* Restore
-* Settings
-* Profit Report
-* User Management
-
-Admin must be able to change permissions.
-
-A cashier must NOT be able to bypass permissions by manually typing a URL.
+Authorization must be enforced on the backend.
 
 ---
 
-# 9. DASHBOARD
+# 7. ROLE & PERMISSION SYSTEM
 
-Create a professional animated dashboard.
+Create:
 
-Show:
+* users
+* roles
+* permissions
+* role_permissions
+
+Use Laravel middleware/policies/gates.
+
+Every sensitive action must verify authorization server-side.
+
+---
+
+# 8. DASHBOARD
+
+Dashboard must show:
 
 * Today's sales
 * Today's profit
@@ -297,10 +223,9 @@ Show:
 * Total suppliers
 * Customer due
 * Supplier due
-* Low-stock products
+* Low stock products
 * Out-of-stock products
 * Recent sales
-* Recent invoices
 
 Charts:
 
@@ -308,30 +233,158 @@ Charts:
 * Weekly sales
 * Monthly sales
 * Profit
-* Purchase
-* Expense
+* Purchases
+* Expenses
 * Category-wise sales
 
-Charts should support date filtering.
+Date filters:
+
+* Today
+* Yesterday
+* This week
+* This month
+* Custom date range
+
+Do not confuse:
+
+Revenue ≠ Profit.
 
 ---
 
-# 10. POS / SALES SCREEN
+# 9. PRODUCT MANAGEMENT
 
-Create a fast POS screen.
+Product fields:
+
+* Product name
+* SKU/Product code
+* Category
+* Brand
+* Unit
+* Purchase price
+* Selling price
+* Wholesale price
+* Current stock
+* Minimum stock
+* Image
+* Description
+* Status
+* Created date
+* Updated date
+
+Functions:
+
+* Add product
+* Edit product
+* View product
+* Disable product
+* Enable product
+* Archive/delete where safe
+* Search
+* Filter
+* Pagination
+
+---
+
+# 10. MULTIPLE BARCODE SYSTEM
+
+This is VERY IMPORTANT.
+
+One product may have many unique physical barcodes.
+
+Example:
+
+A Company Oil has 100 bottles.
+
+Every bottle has a different barcode.
+
+I must NOT create the same product 100 times.
+
+Instead:
+
+Product:
+
+A Company Oil
+
+Stock:
+
+100
+
+Barcodes:
+
+* 890000000001
+* 890000000002
+* 890000000003
+* ...
+* 890000000100
+
+All barcodes must point to the SAME product.
+
+Database:
+
+products
+
+product_barcodes
+
+Relationship:
+
+Product → hasMany → ProductBarcodes
+
+Barcode → belongsTo → Product
+
+---
+
+# 11. BULK BARCODE ENTRY
+
+Create a dedicated barcode management screen.
+
+Workflow:
+
+1. Select product
+2. Scan barcode
+3. Save barcode
+4. Automatically prepare for next scan
+5. Scan next barcode
+6. Continue
+
+Do NOT require entering product information repeatedly.
 
 Features:
 
+* USB barcode scanner support
+* Manual barcode entry
+* Duplicate barcode prevention
+* Barcode validation
+* Search barcode
+* Delete barcode
+* Primary barcode
+* Bulk barcode entry
+* Barcode generation
+* Barcode printing
+
+A normal USB barcode scanner usually behaves like a keyboard.
+
+The POS must support rapid scan → Enter workflows.
+
+---
+
+# 12. POS SCREEN
+
+POS must be extremely fast.
+
+Required:
+
+* Barcode input
 * Product search
-* Barcode scan
-* Product category filter
+* Search by name
+* Search by SKU
+* Search by barcode
+* Category filter
 * Product cards
-* Product image
-* Add to cart
-* Remove from cart
+* Add product
+* Remove product
 * Increase quantity
 * Decrease quantity
-* Manual quantity input
+* Manual quantity
 * Discount
 * VAT/tax
 * Subtotal
@@ -341,282 +394,193 @@ Features:
 * Due payment
 * Change calculation
 * Payment method
-* Hold bill
-* Resume bill
-* Clear cart
-* Cancel sale
-* Complete sale
-* Print receipt
 
-The POS must be optimized for real shop usage.
+Payment methods:
 
----
+* Cash
+* Card
+* Mobile banking
+* Other
 
-# 11. BARCODE SYSTEM — VERY IMPORTANT
+Buttons:
 
-Create a professional barcode system.
-
-USB barcode scanners should work.
-
-Barcode scanner input should be handled using Vanilla JavaScript.
-
-Support:
-
-* Barcode scanning
-* Barcode searching
-* Barcode generation
-* Barcode printing
-* Barcode validation
-* Duplicate barcode prevention
-* Multiple barcodes for one product
-* Bulk barcode entry
-
-## IMPORTANT REAL-WORLD REQUIREMENT
-
-Suppose I have:
-
-Product:
-
-A Company Oil 1L
-
-I have 100 bottles.
-
-Every bottle may have a different barcode.
-
-I DO NOT want to create the product 100 times.
-
-I want:
-
-Product created ONE time:
-
-A Company Oil 1L
-Brand: A Company
-Purchase Price: 150
-Selling Price: 180
-Stock: 100
-
-Then I want to attach 100 different barcodes to this SAME product.
-
-Example:
-
-890000001
-890000002
-890000003
-...
-890000100
-
-Create a Bulk Barcode Entry screen.
-
-Workflow:
-
-Select Product
-→ Scan barcode
-→ Barcode automatically added
-→ Scan next barcode
-→ Automatically added
-→ Continue
-
-The product name, price, category and other information must NOT need to be entered repeatedly.
-
-When any assigned barcode is scanned in POS:
-
-Barcode
-→ Find associated product
-→ Add product to cart
-
-Prevent duplicate barcode assignment.
+* New Sale
+* Clear Cart
+* Hold Bill
+* Resume Bill
+* Cancel Sale
+* Complete Sale
 
 ---
 
-# 12. PRODUCT MANAGEMENT
+# 13. STOCK MANAGEMENT
 
-Product fields:
+Stock must never become inconsistent.
 
-* Product name
-* SKU/Product code
-* Multiple barcodes
-* Category
-* Brand
-* Unit
-* Purchase price
-* Selling price
-* Wholesale price
-* Current stock
-* Minimum stock
-* Product image
-* Description
-* Status
-* Created date
-* Updated date
+Purchase:
 
-Features:
+Stock increases.
 
-* Add
-* Edit
-* View
-* Search
-* Archive/Delete
-* Disable
-* Product history
+Sale:
 
-Do not permanently delete products if doing so would break old invoices or transaction history.
+Stock decreases.
 
-Use archive/soft-delete where appropriate.
+Return:
 
----
+Stock is adjusted correctly.
 
-# 13. CATEGORY MANAGEMENT
+Manual stock adjustment:
 
-Support:
+Must create a stock movement record.
 
-* Add category
-* Edit category
-* Archive/delete category
-* Search category
-* Category-wise products
+Create:
+
+stock_movements
+
+Track:
+
+* Product
+* Quantity
+* Previous stock
+* New stock
+* Movement type
+* Reference
+* User
+* Date/time
+
+Never update stock without recording the movement when the movement is part of a business transaction.
 
 ---
 
-# 14. BRAND MANAGEMENT
+# 14. SALE TRANSACTION
 
-Support:
+Sale completion must use a database transaction.
 
-* Add brand
-* Edit brand
-* Archive/delete brand
-* Search brand
-* Brand-wise products
+Process:
+
+1. Validate cart
+2. Validate products
+3. Validate stock
+4. Create sale
+5. Create sale items
+6. Decrease stock
+7. Create stock movements
+8. Record payment
+9. Calculate due/change
+10. Commit transaction
+
+If anything fails:
+
+ROLLBACK everything.
+
+Never create half-completed sales.
 
 ---
 
 # 15. PURCHASE MANAGEMENT
 
-Create purchase management.
+Purchase fields:
 
-Workflow:
+* Supplier
+* Product
+* Quantity
+* Purchase price
+* Total
+* Discount
+* Grand total
+* Paid
+* Due
+* Invoice number
+* Date
 
-Supplier
-→ Product
-→ Quantity
-→ Purchase Price
-→ Save Purchase
+When purchase is completed:
 
-After completing purchase:
+* Increase stock
+* Create purchase record
+* Create purchase items
+* Create stock movements
+* Update supplier due
 
-Stock must automatically increase.
-
-Example:
-
-Old stock = 20
-Purchase = 50
-New stock = 70
-
-Store complete purchase history.
-
----
-
-# 16. SALES MANAGEMENT
-
-After completing a sale:
-
-Stock must automatically decrease.
-
-Example:
-
-Stock = 70
-Sold = 3
-Remaining = 67
-
-Use database transactions for sales and stock changes.
+Use DB transaction.
 
 ---
 
-# 17. RETURN SYSTEM
-
-Create sales return functionality.
-
-Support:
-
-* Select invoice
-* Select product
-* Return quantity
-* Return reason
-* Refund amount
-* Stock adjustment
-* Return history
-
-Do not allow invalid return quantities.
-
----
-
-# 18. CUSTOMER MANAGEMENT
+# 16. CUSTOMER MANAGEMENT
 
 Customer fields:
 
 * Name
 * Phone
-* Address
 * Email
-* Total purchase
-* Paid
-* Due
+* Address
+* Opening due
 * Status
 
-Features:
+Functions:
 
-* Add customer
-* Edit customer
-* Search customer
-* View purchase history
-* View due
-* Receive payment
+* Add
+* Edit
+* Search
+* View profile
+* Sale history
 * Payment history
+* Due history
+* Collect due
+
+Show:
+
+* Total purchase
+* Total paid
+* Total due
 
 ---
 
-# 19. CUSTOMER DUE
-
-Example:
-
-Total = 5000
-Paid = 3000
-Due = 2000
-
-Later:
-
-Customer pays 1000
-
-Remaining due = 1000
-
-Maintain complete payment history.
-
----
-
-# 20. SUPPLIER MANAGEMENT
+# 17. SUPPLIER MANAGEMENT
 
 Supplier fields:
 
 * Name
-* Phone
-* Address
-* Email
 * Company
-* Due
+* Phone
+* Email
+* Address
+* Opening due
 
-Features:
+Functions:
 
-* Add supplier
-* Edit supplier
-* Search supplier
+* Add
+* Edit
+* Search
 * Purchase history
-* Supplier due
-* Supplier payment history
+* Payment history
+* Due history
+* Pay supplier due
 
 ---
 
-# 21. EXPENSE MANAGEMENT
+# 18. RETURNS
 
-Support expenses:
+Implement sales returns.
+
+Required:
+
+* Find invoice
+* Select product
+* Return quantity
+* Reason
+* Refund amount
+* Stock adjustment
+* Return history
+
+Prevent returning more quantity than originally sold.
+
+Use transactions.
+
+---
+
+# 19. EXPENSE MANAGEMENT
+
+Expense categories:
 
 * Electricity
 * Rent
@@ -633,20 +597,24 @@ Fields:
 * Note
 * Created by
 
-Use expenses in net profit calculations.
+Expenses must be included in net profit.
+
+Formula:
+
+Gross Profit = Sales Revenue - Cost of Goods Sold
+
+Net Profit = Gross Profit - Expenses
 
 ---
 
-# 22. INVOICE / RECEIPT
+# 20. INVOICE / RECEIPT
 
-Create professional invoices.
-
-Invoice should include:
+Invoice must contain:
 
 * Shop logo
 * Shop name
-* Address
-* Phone
+* Shop address
+* Shop phone
 * Invoice number
 * Date
 * Time
@@ -656,283 +624,176 @@ Invoice should include:
 * Quantity
 * Unit price
 * Discount
-* VAT/tax
+* VAT
 * Subtotal
 * Total
 * Paid
 * Due
 * Change
 
-Support:
+Print formats:
+
+* 58mm thermal
+* 80mm thermal
+* A4
+
+Print CSS must print ONLY the invoice/receipt.
+
+Do NOT print:
+
+* Sidebar
+* Dashboard
+* Navigation
+* Buttons
+* Other UI
+
+Functions:
 
 * Print
 * Reprint
 * Invoice history
-
-Create layouts for:
-
-* 58mm thermal printer
-* 80mm thermal printer
-* Normal printer/A4 invoice
+* View invoice
 
 ---
 
-# 23. PRINT SYSTEM
+# 21. HOLD BILL
 
-Use print-friendly CSS.
+Implement:
 
-When printing receipt:
+* Hold bill
+* Resume bill
+* Delete held bill
 
-Only the receipt should print.
-
-Do not print the dashboard/sidebar.
-
-Support browser/local printer workflow.
+Each held bill must store its cart data safely.
 
 ---
 
-# 24. SALES REPORT
+# 22. REPORTS
 
-Create:
+Create reports for:
 
-* Daily sales
-* Weekly sales
-* Monthly sales
-* Custom date range
-* Product-wise sales
-* Cashier-wise sales
-* Customer-wise sales
+## Sales
+
+* Daily
+* Weekly
+* Monthly
+* Custom date
+* Product-wise
+* Category-wise
+* Cashier-wise
+* Customer-wise
 
 Show:
 
 * Total sales
-* Total transactions
+* Number of transactions
 * Discount
 * VAT
 * Paid
 * Due
 * Profit
 
----
+## Purchase
 
-# 25. PURCHASE REPORT
+* Daily
+* Weekly
+* Monthly
+* Supplier-wise
+* Product-wise
 
-Show:
-
-* Total purchases
-* Purchase amount
-* Supplier
-* Product
-* Quantity
-* Date
-* Payment
-* Due
-
----
-
-# 26. PROFIT REPORT
-
-Calculate:
-
-Selling price - purchase cost = gross profit
-
-Then:
-
-Gross profit - expenses = net profit
+## Profit
 
 Show clearly:
 
-* Gross sales
-* Cost of goods
-* Gross profit
-* Expenses
-* Net profit
+Sales revenue
 
-Do not mix revenue and profit.
+COGS
 
----
+Gross profit
 
-# 27. STOCK REPORT
+Expenses
 
-Show:
+Net profit
 
-* Product
+## Stock
+
 * Current stock
-* Minimum stock
 * Low stock
 * Out of stock
 * Stock movement
 
-Stock history should include:
-
-* Purchase
-* Sale
-* Return
-* Adjustment
+All reports must support filters and pagination where appropriate.
 
 ---
 
-# 28. NOTIFICATIONS
+# 23. SEARCH
 
-Create animated toast notifications.
+Global/appropriate searches:
+
+* Product name
+* SKU
+* Barcode
+* Customer name
+* Customer phone
+* Supplier name
+* Supplier phone
+* Invoice number
+* Date
+
+Use indexed database columns where appropriate.
+
+---
+
+# 24. KEYBOARD SHORTCUTS
+
+Implement:
+
+* F1 → New Sale
+* F2 → Search
+* F4 → Customer
+* F8 → Payment
+* Enter → Complete/confirm where appropriate
+* Esc → Close modal
+
+Do not interfere with normal browser behavior unnecessarily.
+
+---
+
+# 25. NOTIFICATIONS
+
+Use animated toast notifications for:
+
+* Success
+* Error
+* Warning
+* Info
 
 Examples:
 
-Success:
-"Sale completed successfully."
+"Product saved successfully."
 
-Warning:
-"Low stock."
+"Insufficient stock."
 
-Error:
 "Barcode already exists."
 
-Info:
-"Backup completed."
+"Sale completed successfully."
 
 ---
 
-# 29. KEYBOARD SHORTCUTS
+# 26. DATABASE DESIGN
 
-Support useful POS shortcuts.
+Use normalized relational database design.
 
-Example:
-
-F1 = New Sale
-F2 = Product Search
-F4 = Customer
-F8 = Payment
-Enter = Complete action
-Esc = Close modal
-
-Create a shortcut help screen.
-
----
-
-# 30. HOLD BILL
-
-Support:
-
-* Hold current bill
-* Start another sale
-* View held bills
-* Resume held bill
-* Delete held bill
-
----
-
-# 31. INVOICE HISTORY
-
-Support:
-
-* Search invoice
-* Filter by date
-* Filter by cashier
-* View invoice
-* Reprint
-* View payment
-* View returned products
-
----
-
-# 32. BACKUP / RESTORE
-
-Admin only.
-
-Support:
-
-* Database backup
-* Download backup
-* Restore backup
-* Backup history if practical
-
-Validate backup before restoring.
-
-Cashiers must not access this.
-
----
-
-# 33. ACTIVITY LOG
-
-Log important actions:
-
-* Login
-* Logout
-* Product creation
-* Product update
-* Product archive/delete
-* Purchase
-* Sale
-* Return
-* Expense
-* User creation
-* User deletion
-* Permission change
-* Backup
-* Restore
-
-Store:
-
-* User
-* Action
-* Date/time
-* Related record if applicable
-
----
-
-# 34. SETTINGS
-
-Shop Settings:
-
-* Shop name
-* Logo
-* Address
-* Phone
-* Email
-* Currency
-
-Invoice Settings:
-
-* Invoice prefix
-* Receipt size
-* Footer
-* Logo visibility
-* Customer visibility
-
-Tax:
-
-* Enable/disable
-* Tax rate
-
-Theme:
-
-* Light
-* Dark
-
-System:
-
-* Backup
-* Restore
-* Other configuration
-
----
-
-# 35. DATABASE
-
-Use SQLite.
-
-Design a proper relational database.
-
-Expected tables include, but are not limited to:
+Minimum tables:
 
 * users
 * roles
 * permissions
 * role_permissions
-* products
-* product_barcodes
 * categories
 * brands
+* products
+* product_barcodes
 * customers
 * suppliers
 * purchases
@@ -953,352 +814,462 @@ Expected tables include, but are not limited to:
 Use:
 
 * Foreign keys
-* Indexes where useful
-* Relationships
+* Indexes
+* Unique constraints
+* Proper data types
 * Timestamps
-* Database transactions
+* Relationships
 
 ---
 
-# 36. DATA INTEGRITY
+# 27. SECURITY
 
-Financial and stock operations must use database transactions.
+Security is extremely important.
 
-For example:
+Implement Laravel best practices:
 
-SALE:
+* CSRF protection
+* Password hashing
+* Authorization
+* Policies/Gates
+* Middleware
+* Form Request validation
+* SQL injection protection through Eloquent/query builder
+* XSS-safe output
+* Mass assignment protection
+* Secure sessions
+* Login throttling/rate limiting
+* Proper error handling
+* Activity logging
+* Permission checks on backend
+* Secure file upload validation
+* No sensitive information in Git
 
-1. Validate product
-2. Validate stock
-3. Create sale
-4. Create sale items
-5. Decrease stock
-6. Create stock movement
-7. Record payment
-8. Commit
+Never trust frontend JavaScript for security.
 
-If any step fails:
+Frontend permission hiding is NOT enough.
 
-Rollback the entire transaction.
-
----
-
-# 37. SEARCH
-
-Search by:
-
-* Product name
-* SKU
-* Barcode
-* Customer name
-* Customer phone
-* Invoice number
-* Supplier
-* Date
-
-Use pagination where necessary.
+Backend must enforce permissions.
 
 ---
 
-# 38. UX
+# 28. ACTIVITY LOG
 
-Optimize for real shop use.
+Log important actions:
 
-Important:
+* Login
+* Logout
+* Product create
+* Product update
+* Product archive/delete
+* Barcode add/delete
+* Purchase
+* Sale
+* Return
+* Expense
+* Customer change
+* Supplier change
+* User creation
+* User update
+* Permission change
+* Backup
+* Restore
 
-* Fast POS
-* Minimal typing
-* Barcode-first
-* Keyboard shortcuts
-* Large important buttons
-* Clear errors
-* Confirmation before destructive actions
-* Touch-friendly controls
-* Responsive UI
+Store:
+
+* User
+* Action
+* Related record
+* IP
+* Description
+* Date/time
 
 ---
 
-# 39. ERROR HANDLING
+# 29. BACKUP / RESTORE
 
-Do not expose raw technical errors to normal users.
+Admin-only.
 
-Show friendly messages.
+Functions:
 
-Keep technical errors in logs for debugging.
+* Create database backup
+* Download backup
+* Restore backup
+* Validate backup
+* Log backup action
+* Log restore action
+
+Do not expose backup/restore to cashier.
+
+Never store production credentials in Git.
 
 ---
 
-# 40. CODE QUALITY
+# 30. SETTINGS
 
-Use proper Laravel architecture:
+Settings:
 
-* Routes
+* Shop name
+* Logo
+* Address
+* Phone
+* Email
+* Tax/VAT
+* Invoice prefix
+* Invoice format
+* Currency
+* Theme
+* Receipt settings
+* Backup settings
+
+---
+
+# 31. CODE ARCHITECTURE
+
+Keep code clean.
+
+Use:
+
 * Controllers
 * Models
+* Form Requests
+* Policies
+* Middleware
+* Services where business logic becomes complex
+* Blade components
 * Migrations
 * Seeders
-* Blade
-* Form Requests
-* Policies/Gates
-* Services where useful
 
-Keep:
+Do NOT put the entire application inside one controller or one Blade file.
 
-* CSS organized
-* JavaScript modular
-* Database normalized
+Avoid giant JavaScript files.
 
-Do not create one giant file for everything.
+Organize CSS and JS logically.
 
 ---
 
-# 41. DEMO DATA
+# 32. GIT
 
-Create seeders containing:
+Project must be Git-friendly.
 
-* 1 Admin
-* 2 Cashiers
-* Categories
-* Brands
-* Products
-* Multiple barcodes for one product
-* Customers
-* Suppliers
-* Sample purchases
-* Sample sales
+Include:
 
-Provide demo login credentials clearly.
-
-Do not use real credentials.
-
----
-
-# 42. GIT COMPATIBILITY
-
-The project must be Git-friendly.
-
-Provide:
-
-* Proper `.gitignore`
+* `.gitignore`
 * `.env.example`
-* Clear README
-* Meaningful commits suggested for major features
+* README
+* Clear folder structure
 
 Never commit:
 
 * `.env`
 * passwords
 * API keys
-* secrets
-* database files if they contain private production data
+* production database
+* private credentials
+
+Use meaningful commits, for example:
+
+```text
+feat: add product management
+feat: add multiple barcode system
+feat: add purchase workflow
+feat: add POS checkout
+fix: prevent negative stock
+fix: validate duplicate barcode
+security: enforce cashier permissions
+```
 
 ---
 
-# 43. DEVELOPMENT PROCESS
+# 33. DEMO DATA
 
-Build the application in logical phases.
+Seeder should create:
 
-Suggested phases:
+Admin:
 
-PHASE 1:
-Laravel setup + SQLite + base UI
+```text
+admin@example.com
+password
+```
 
-PHASE 2:
-Authentication + Admin/Cashier + permissions
+Cashier:
 
-PHASE 3:
-Responsive animated UI + theme
+```text
+cashier@example.com
+password
+```
 
-PHASE 4:
-Products + Categories + Brands
+Also create:
 
-PHASE 5:
-Multiple Barcode + Bulk Barcode
+* Demo categories
+* Demo brands
+* Demo products
+* Multiple barcodes
+* Demo customers
+* Demo suppliers
+* Demo purchase
+* Demo sales
 
-PHASE 6:
-Purchase + Stock
+Clearly warn that demo passwords must be changed.
 
-PHASE 7:
-POS + Sales + Payment
+---
 
-PHASE 8:
-Receipt + Invoice + Printing
+# 34. DEVELOPMENT METHOD
 
-PHASE 9:
-Customers + Due
+Build the project in phases.
 
-PHASE 10:
-Suppliers + Due
+## Phase 1
 
-PHASE 11:
+Laravel + MySQL + XAMPP setup
+
+## Phase 2
+
+Authentication
+
+## Phase 3
+
+Roles & permissions
+
+## Phase 4
+
+Responsive animated UI
+
+## Phase 5
+
+Products/categories/brands
+
+## Phase 6
+
+Multiple/bulk barcode system
+
+## Phase 7
+
+Purchases + stock
+
+## Phase 8
+
+POS + sales + payments
+
+## Phase 9
+
+Invoices + printing
+
+## Phase 10
+
+Customers + due
+
+## Phase 11
+
+Suppliers + due
+
+## Phase 12
+
 Returns
 
-PHASE 12:
-Expenses + Profit
+## Phase 13
 
-PHASE 13:
-Reports + Dashboard charts
+Expenses + profit
 
-PHASE 14:
-Hold Bill + Invoice History + Keyboard shortcuts
+## Phase 14
 
-PHASE 15:
-Backup + Restore + Activity Log
+Reports + dashboard charts
 
-PHASE 16:
+## Phase 15
+
+Hold/resume bills + shortcuts
+
+## Phase 16
+
+Backup/restore + activity logs
+
+## Phase 17
+
 Security audit
 
-PHASE 17:
-Responsive/UI/Animation optimization
+## Phase 18
 
-PHASE 18:
-Final testing and documentation
+Responsive/mobile/tablet optimization
 
----
+## Phase 19
 
-# 44. IMPORTANT — DO NOT LOSE FEATURES
+Performance optimization
 
-Maintain a master checklist throughout development.
+## Phase 20
 
-Every time a feature is completed, mark it:
-
-[✓] Completed
-[~] Partially completed
-[ ] Not completed
-[!] Bug/problem found
-
-Never remove a completed feature without explicitly telling me.
-
-When adding a new feature, verify that old features still work.
+Final QA/testing
 
 ---
 
-# 45. FUTURE ZIP AUDIT MODE
+# 35. IMPORTANT DEVELOPMENT RULE
 
-IMPORTANT:
+Do NOT simply give me an architecture or explanation.
 
-Later I may upload the entire Laravel POS project as a ZIP file.
+Actually create/update the code.
+
+When I ask for a feature:
+
+1. Inspect the existing project structure.
+2. Preserve existing working features.
+3. Implement the requested feature.
+4. Update migrations/models/controllers/routes/views/JS/CSS as required.
+5. Check database relationships.
+6. Check security.
+7. Check responsive behavior.
+8. Check for errors.
+9. Tell me exactly which files changed.
+10. Give me the updated ZIP when appropriate.
+
+Never silently remove an existing feature.
+
+---
+
+# 36. ZIP PROJECT AUDIT MODE
+
+Later I may upload the complete Laravel project ZIP.
 
 When I say:
 
 "AUDIT THIS PROJECT AGAINST THE MASTER POS REQUIREMENTS"
 
-you must inspect the actual project files and compare them against EVERY requirement in this prompt.
+you must inspect the ACTUAL project files.
 
-Do NOT just give a general review.
+Do NOT assume that a feature exists because a route, button, table, or comment exists.
 
-Create a detailed audit containing:
+Verify actual implementation.
 
-## FEATURE AUDIT
+Create a checklist:
 
-For every requirement:
+| Requirement | Status | Evidence/File | Problem | Required Fix |
+| ----------- | ------ | ------------- | ------- | ------------ |
 
-* Status: PASS / PARTIAL / MISSING / BROKEN
-* Relevant file(s)
-* What is implemented
-* What is missing
-* What should be changed
+Statuses:
 
-Check at minimum:
+* PASS
+* PARTIAL
+* MISSING
+* BROKEN
 
-* Authentication
-* Security
-* Admin
-* Cashier
-* Permissions
-* Products
-* Categories
-* Brands
-* Multiple barcodes
-* Bulk barcode entry
-* POS
-* Sales
-* Purchases
-* Stock
-* Returns
-* Customers
-* Customer due
-* Suppliers
-* Supplier due
-* Expenses
-* Profit
-* Reports
-* Invoice
-* Receipt
-* Printing
-* Hold bill
-* Keyboard shortcuts
-* Backup
-* Restore
-* Activity log
-* Themes
-* Animation
-* Responsive design
-* Database integrity
-* Validation
-* Git readiness
+Check every requirement from this master prompt.
 
-Also inspect:
+Also check:
 
+* Database
 * Routes
 * Controllers
 * Models
-* Migrations
-* Blade files
-* JavaScript
+* Middleware
+* Policies
+* Validation
+* Blade
 * CSS
-* Authentication
-* Authorization
-* Database relationships
+* JavaScript
 * Security
-* Error handling
+* Transactions
+* Permissions
+* Mobile responsiveness
+* Printing
+* Barcode workflow
+* Stock consistency
+* Reports
+* Backup
+* Activity logs
 
-If a feature exists but is incomplete, mark it PARTIAL.
-
-If a feature exists but does not work correctly, mark it BROKEN.
-
-Do not assume a feature works merely because a button or page exists.
-
-Trace the actual implementation.
-
----
-
-# 46. ZIP AUDIT — DO NOT CHANGE CODE AUTOMATICALLY
-
-When I upload a ZIP for audit:
-
-First inspect and report.
-
-Do NOT modify the project unless I explicitly ask you to fix the issues.
-
-If I later say:
+Do NOT modify the project during audit unless I explicitly say:
 
 "FIX ALL ISSUES"
 
-then provide the required modifications in a controlled manner while preserving all existing working features.
+---
+
+# 37. FIX ALL ISSUES MODE
+
+If I say:
+
+"FIX ALL ISSUES"
+
+then:
+
+1. Fix every MISSING/PARTIAL/BROKEN requirement that can be implemented.
+2. Preserve existing working features.
+3. Do not rewrite unnecessarily.
+4. Do not introduce duplicate tables/routes/features.
+5. Run appropriate tests/checks.
+6. Check migrations and relationships.
+7. Check security.
+8. Check responsive UI.
+9. Re-audit after fixing.
+10. Give me a final report.
 
 ---
 
-# 47. START NOW
+# 38. QUALITY STANDARD
 
-Do NOT generate the entire application in one giant response.
+The final application should feel like a real commercial retail POS.
 
-Start by:
+Priorities:
 
-1. Confirming the technology stack.
-2. Creating the complete architecture.
-3. Creating the database relationship plan.
-4. Creating the master feature checklist.
-5. Creating the folder structure.
-6. Explaining PHASE 1.
-7. Then start implementing PHASE 1 with complete working code.
+1. Correctness
+2. Security
+3. Data integrity
+4. Speed
+5. Usability
+6. Responsive design
+7. Professional UI
+8. Maintainable code
+9. Git compatibility
+10. Easy future development
 
-Remember:
+Never claim something is complete when it is only a scaffold.
 
-I will use Git.
+Clearly label:
 
-I want the actual application built step by step.
+* Completed
+* Partial
+* Missing
+* Bug
+* Not tested
 
-Later I will be able to upload the ZIP and ask you to audit it against this exact specification.
+---
 
-Do not omit any requirement from this prompt.
+# 39. CURRENT PROJECT ENVIRONMENT
+
+My environment:
+
+```text
+OS: Windows
+Server: XAMPP
+Web server: Apache
+Database: MySQL
+Backend: Laravel/PHP
+Frontend: Blade + HTML + CSS + Vanilla JavaScript
+Version control: Git
+```
+
+Project folder:
+
+```text
+C:\xampp\htdocs\retail-pos
+```
+
+Database:
+
+```text
+retail_pos
+```
+
+---
+
+# 40. FINAL INSTRUCTION
+
+Treat this entire document as the MASTER REQUIREMENTS SPECIFICATION.
+
+Every future development request must be checked against this specification.
+
+Do not forget previously implemented requirements.
+
+Do not remove old functionality without telling me.
+
+If a requested feature conflicts with an existing requirement, explain the conflict and propose a safe implementation.
+
+If information is missing, ask me before making a risky assumption.
+
+Build the application step-by-step until it becomes a complete, secure, professional Retail POS system.
