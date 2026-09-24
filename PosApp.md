@@ -1,1275 +1,2752 @@
-# RETAIL POS SYSTEM — MASTER DEVELOPMENT PROMPT
-
-You are my senior Laravel/PHP POS software engineer, database architect, UI/UX designer, security engineer, QA tester, and code reviewer.
-
-I am building a professional **Retail Point of Sale (POS) System** for a real shop.
-
-The project must be developed carefully, professionally, securely, and incrementally.
-
----
-
-# 1. TECHNOLOGY STACK
-
-Use:
-
-* PHP 8.2+
-* Laravel 12+
-* MySQL
-* HTML5
-* CSS3
-* Vanilla JavaScript
-* Blade
-* Laravel Eloquent ORM
-* Laravel migrations
-* Laravel seeders
-* Laravel Form Requests
-* Laravel Policies/Gates
-* Laravel middleware
-* Laravel database transactions
+Laravel database transactions
 
-Development environment:
+Do NOT use:
 
-* XAMPP
-* Apache
-* MySQL
-* Composer
-* Git/GitHub
+React
 
-Do NOT use React, Vue, Angular, Node backend, MongoDB, Firebase, or unnecessary external frameworks.
+Vue
 
-Use JavaScript libraries only when genuinely useful.
+Angular
 
----
+Node.js backend
 
-# 2. MAIN GOAL
+MongoDB
 
-Build a complete professional Retail POS system that works on:
+Firebase
 
-* Desktop PC
-* Laptop
-* Tablet
-* Mobile
+Unnecessary frontend frameworks
 
-The interface must be:
+JavaScript libraries may be used only when genuinely useful.
 
-* Fast
-* Responsive
-* Touch-friendly
-* Modern
-* Professional
-* Easy for a shop cashier to operate
-* Barcode-first
-* Minimal typing
-* Highly animated but not annoying
-* Lightweight enough for normal shop computers
+2. DATABASE — XAMPP MYSQL
+The application MUST use XAMPP MySQL as the primary database.
 
----
+Database:
 
-# 3. UI / UX
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=retail_pos
+DB_USERNAME=root
+DB_PASSWORD=
 
-Create a modern POS interface.
+Project:
 
-Required:
+C:\xampp\htdocs\retail-pos
 
-* Dashboard
-* Sidebar
-* Top navigation
-* Cards
-* Tables
-* Product cards
-* POS cart
-* Modals
-* Dropdowns
-* Forms
-* Notifications
-* Loading states
-* Empty states
-* Error states
-* Confirmation dialogs
+Do not use SQLite as the main application database.
 
-Animations should exist for:
+Do not use MongoDB or Firebase.
 
-* Login
-* Page transitions
-* Sidebar
-* Buttons
-* Cards
-* Product cards
-* Cart items
-* Modals
-* Dropdowns
-* Toast notifications
-* Success messages
-* Error messages
-* Loading indicators
-* Charts
-
-Animations must remain professional and fast.
-
----
-
-# 4. THEME
-
-Provide:
-
-* Light mode
-* Dark mode
-
-Theme preference must persist after page refresh.
-
-Use CSS variables where appropriate.
-
----
-
-# 5. AUTHENTICATION
-
-Implement secure authentication.
-
-Required:
-
-* Login
-* Logout
-* Password hashing
-* Session security
-* Remember-me if appropriate
-* Login validation
-* Login rate limiting/protection
-* Unauthorized access protection
-* Session regeneration
-* CSRF protection
-
-Never store plain-text passwords.
-
----
-
-# 6. USER SYSTEM
-
-There will be:
-
-## Admin
-
-Admin can:
-
-* Create cashier
-* Edit cashier
-* Disable cashier
-* Enable cashier
-* Delete/archive cashier
-* Reset password
-* View users
-* Manage permissions
-* View activity logs
-* Manage products
-* Manage categories
-* Manage brands
-* Manage purchases
-* Manage sales
-* Manage customers
-* Manage suppliers
-* Manage expenses
-* Manage reports
-* Manage settings
-* Backup database
-* Restore database
-
-## Cashier
-
-Cashier permissions must be configurable by Admin.
-
-Examples:
-
-* POS access
-* Product search
-* Customer access
-* Sale access
-* Hold bill
-* Return permission
-* Discount permission
-* View reports
-* Print invoice
-
-A cashier must NEVER bypass permission restrictions by manually entering URLs.
-
-Authorization must be enforced on the backend.
-
----
-
-# 7. ROLE & PERMISSION SYSTEM
-
-Create:
-
-* users
-* roles
-* permissions
-* role_permissions
-
-Use Laravel middleware/policies/gates.
-
-Every sensitive action must verify authorization server-side.
-
----
-
-# 8. DASHBOARD
-
-Dashboard must show:
-
-* Today's sales
-* Today's profit
-* Today's purchases
-* Today's expenses
-* Total products
-* Total stock
-* Total customers
-* Total suppliers
-* Customer due
-* Supplier due
-* Low stock products
-* Out-of-stock products
-* Recent sales
-
-Charts:
-
-* Daily sales
-* Weekly sales
-* Monthly sales
-* Profit
-* Purchases
-* Expenses
-* Category-wise sales
-
-Date filters:
-
-* Today
-* Yesterday
-* This week
-* This month
-* Custom date range
-
-Do not confuse:
-
-Revenue ≠ Profit.
-
----
-
-# 9. PRODUCT MANAGEMENT
-
-Product fields:
-
-* Product name
-* SKU/Product code
-* Category
-* Brand
-* Unit
-* Purchase price
-* Selling price
-* Wholesale price
-* Current stock
-* Minimum stock
-* Image
-* Description
-* Status
-* Created date
-* Updated date
-
-Functions:
-
-* Add product
-* Edit product
-* View product
-* Disable product
-* Enable product
-* Archive/delete where safe
-* Search
-* Filter
-* Pagination
-
----
-
-# 10. MULTIPLE BARCODE SYSTEM
-
-This is VERY IMPORTANT.
-
-One product may have many unique physical barcodes.
+3. CORE PRODUCT CONCEPT
+SKU, Barcode, Product Image, and Stock are separate concepts.
 
 Example:
 
-A Company Oil has 100 bottles.
+Product
+│
+├── Name: A Company Oil 1L
+├── SKU: OIL-000001
+├── Image: oil-1l.webp
+├── Selling Price: 180.00
+├── Purchase Price: 150.00
+├── Current Stock: 100
+│
+└── Barcodes
+    ├── 890000000001
+    ├── 890000000002
+    └── 890000000003
 
-Every bottle has a different barcode.
+All three barcodes belong to the SAME product.
 
-I must NOT create the same product 100 times.
+Do NOT create three products.
 
-Instead:
+4. AUTOMATIC SKU
+SKU means Stock Keeping Unit.
+
+SKU must be automatically generated by the system.
+
+The user should normally NOT manually type the SKU.
+
+Example:
+
+OIL-000001
+OIL-000002
+GRC-000003
+DRK-000004
+
+Requirements:
+
+SKU must be unique.
+
+SKU must be generated server-side.
+
+SKU must have a database unique constraint.
+
+Duplicate SKU must never be possible.
+
+Concurrent product creation must be handled safely.
+
+SKU must remain stable.
+
+Sale must NOT reduce SKU.
+
+Purchase must NOT change SKU.
+
+Stock adjustment must NOT change SKU.
+
+SKU should normally be immutable after creation.
+
+Example:
+
+SKU: OIL-000001
+Stock: 100
+
+After one sale:
+
+SKU: OIL-000001
+Stock: 99
+
+The SKU remains unchanged.
+
+5. PRODUCT IMAGE SYSTEM — VERY IMPORTANT
+Every product may have an image.
+
+Product image must be supported throughout the application.
+
+Product fields should include:
+
+Product Name
+SKU
+Category
+Brand
+Unit
+Purchase Price
+Selling Price
+Wholesale Price
+Current Stock
+Minimum Stock
+Product Image
+Description
+Status
+
+6. PRODUCT IMAGE UPLOAD
+Product creation/editing must support image upload.
+
+Required features:
+
+Upload product image
+
+Image preview before saving
+
+Replace existing image
+
+Remove image
+
+Default image when no image exists
+
+Drag & drop upload where appropriate
+
+Mobile camera/gallery selection where supported
+
+Responsive image preview
+
+Supported formats:
+
+JPG
+
+JPEG
+
+PNG
+
+WebP
+
+Image upload must have:
+
+MIME/type validation
+
+File extension validation
+
+File size validation
+
+Secure filename handling
+
+Server-side validation
+
+Unsafe file upload prevention
+
+Never trust only the frontend file extension.
+
+7. PRODUCT IMAGE STORAGE
+Use Laravel's proper filesystem/storage mechanism.
+
+Do NOT store uploaded binary image data directly inside the main products table.
+
+The products table should store an image path/reference.
+
+Example:
+
+products
+    image
+
+Example value:
+
+products/oil-1l.webp
+
+Use Laravel storage configuration correctly.
+
+Ensure uploaded images are accessible safely through the appropriate public storage mechanism.
+
+Do not expose arbitrary server files.
+
+8. PRODUCT IMAGE REPLACEMENT
+When an existing product image is replaced:
+
+Validate new image.
+
+Upload/store new image.
+
+Update database reference.
+
+Remove the old image safely.
+
+If the database update fails, do not leave unnecessary orphan files.
+
+Handle filesystem/database consistency carefully.
+
+9. PRODUCT IMAGE DISPLAY
+Product image should be visible in:
+
+Product Management
+Product list
+
+Product table
+
+Product cards
+
+Product details
+
+Product edit form
+
+Product view page
+
+POS
+Product image should appear on product cards.
+
+Example:
+
+┌─────────────────────────┐
+│                         │
+│       PRODUCT IMAGE     │
+│                         │
+├─────────────────────────┤
+│ A Company Oil 1L        │
+│ SKU: OIL-000001         │
+│ ৳180                    │
+│ Stock: 100              │
+└─────────────────────────┘
+
+Search
+When searching for a product:
+
+Image
+Product Name
+SKU
+Price
+Stock
+
+should be shown where appropriate.
+
+Product Details
+Show a larger product image.
+
+10. POS PRODUCT IMAGE
+POS product cards must support product images.
+
+The design should be:
+
+Clean
+
+Fast
+
+Touch-friendly
+
+Responsive
+
+Glassmorphism-based
+
+Images should be optimized and displayed with appropriate dimensions.
+
+Do not load unnecessarily huge original images on the POS screen.
+
+Use thumbnails or optimized image sizes where appropriate.
+
+11. IMAGE FALLBACK
+If a product has no image:
+
+Show a professional default placeholder.
+
+Example:
+
+┌───────────────────┐
+│                   │
+│       📦          │
+│   No Image        │
+│                   │
+└───────────────────┘
+
+Do not show broken image icons.
+
+12. MULTIPLE BARCODE SYSTEM
+One product can have many unique physical barcodes.
+
+Example:
 
 Product:
+A Company Oil 1L
 
-A Company Oil
+SKU:
+OIL-000001
 
 Stock:
-
 100
 
 Barcodes:
-
-* 890000000001
-* 890000000002
-* 890000000003
-* ...
-* 890000000100
-
-All barcodes must point to the SAME product.
+890000000001
+890000000002
+890000000003
+...
 
 Database:
 
 products
-
 product_barcodes
 
 Relationship:
 
-Product → hasMany → ProductBarcodes
+Product hasMany ProductBarcode
+ProductBarcode belongsTo Product
 
-Barcode → belongsTo → Product
+Barcode must be globally unique.
 
----
-
-# 11. BULK BARCODE ENTRY
-
+13. BULK BARCODE ENTRY
 Create a dedicated barcode management screen.
 
 Workflow:
 
-1. Select product
-2. Scan barcode
-3. Save barcode
-4. Automatically prepare for next scan
-5. Scan next barcode
-6. Continue
+Select Product
+↓
+Scan Barcode
+↓
+Save
+↓
+Automatically focus input
+↓
+Scan Next Barcode
+↓
+Save
+↓
+Continue
 
-Do NOT require entering product information repeatedly.
+Support:
 
-Features:
+USB barcode scanner
 
-* USB barcode scanner support
-* Manual barcode entry
-* Duplicate barcode prevention
-* Barcode validation
-* Search barcode
-* Delete barcode
-* Primary barcode
-* Bulk barcode entry
-* Barcode generation
-* Barcode printing
+Keyboard-style barcode scanner
 
-A normal USB barcode scanner usually behaves like a keyboard.
+Manual barcode entry
 
-The POS must support rapid scan → Enter workflows.
+Duplicate prevention
 
----
+Barcode validation
 
-# 12. POS SCREEN
+Search
 
-POS must be extremely fast.
+Delete
 
-Required:
+Primary barcode
 
-* Barcode input
-* Product search
-* Search by name
-* Search by SKU
-* Search by barcode
-* Category filter
-* Product cards
-* Add product
-* Remove product
-* Increase quantity
-* Decrease quantity
-* Manual quantity
-* Discount
-* VAT/tax
-* Subtotal
-* Grand total
-* Customer selection
-* Cash payment
-* Due payment
-* Change calculation
-* Payment method
+Bulk entry
 
-Payment methods:
+Barcode generation
 
-* Cash
-* Card
-* Mobile banking
-* Other
+Barcode printing
 
-Buttons:
+Normal scanner workflow:
 
-* New Sale
-* Clear Cart
-* Hold Bill
-* Resume Bill
-* Cancel Sale
-* Complete Sale
+Scan → Enter → Product identified
 
----
+must be extremely fast.
 
-# 13. STOCK MANAGEMENT
+14. AUTOMATIC STOCK MANAGEMENT
+Stock is independent from SKU.
 
-Stock must never become inconsistent.
+Example:
 
+SKU: OIL-000001
+Stock: 100
+
+Sale 1:
+
+100 → 99
+
+Sale 5:
+
+99 → 94
+
+Purchase 20:
+
+94 → 114
+
+Return 2:
+
+114 → 116
+
+SKU always remains:
+
+OIL-000001
+
+15. STOCK RULES
 Purchase:
 
-Stock increases.
+Stock increases
 
 Sale:
 
-Stock decreases.
+Stock decreases
 
-Return:
+Sales return:
 
-Stock is adjusted correctly.
+Stock increases
 
-Manual stock adjustment:
+Purchase return:
 
-Must create a stock movement record.
+Stock decreases
 
+Manual adjustment:
+
+Stock increases/decreases
+
+Every important stock change must create a stock movement record.
+
+16. NEGATIVE STOCK PROTECTION
+Never allow negative stock by default.
+
+Before completing a sale:
+
+Requested Quantity <= Available Stock
+
+If not:
+
+Insufficient stock.
+
+Sale must fail safely.
+
+Backend validation is mandatory.
+
+Do not rely only on JavaScript.
+
+Use appropriate database locking/transaction handling to prevent concurrent sales from causing incorrect stock.
+
+17. STOCK MOVEMENTS
 Create:
 
 stock_movements
 
 Track:
 
-* Product
-* Quantity
-* Previous stock
-* New stock
-* Movement type
-* Reference
-* User
-* Date/time
+Product
 
-Never update stock without recording the movement when the movement is part of a business transaction.
+Quantity
 
----
+Previous stock
 
-# 14. SALE TRANSACTION
+New stock
 
-Sale completion must use a database transaction.
+Movement type
 
-Process:
+Reference type
 
-1. Validate cart
-2. Validate products
-3. Validate stock
-4. Create sale
-5. Create sale items
-6. Decrease stock
-7. Create stock movements
-8. Record payment
-9. Calculate due/change
-10. Commit transaction
+Reference ID
 
-If anything fails:
+User
 
-ROLLBACK everything.
+Description
 
-Never create half-completed sales.
+Date/time
 
----
+Movement types may include:
 
-# 15. PURCHASE MANAGEMENT
+PURCHASE
+SALE
+RETURN
+PURCHASE_RETURN
+ADJUSTMENT
 
-Purchase fields:
+18. POS SCREEN
+The POS must be extremely fast.
 
-* Supplier
-* Product
-* Quantity
-* Purchase price
-* Total
-* Discount
-* Grand total
-* Paid
-* Due
-* Invoice number
-* Date
+Main workflow:
 
-When purchase is completed:
-
-* Increase stock
-* Create purchase record
-* Create purchase items
-* Create stock movements
-* Update supplier due
-
-Use DB transaction.
-
----
-
-# 16. CUSTOMER MANAGEMENT
-
-Customer fields:
-
-* Name
-* Phone
-* Email
-* Address
-* Opening due
-* Status
-
-Functions:
-
-* Add
-* Edit
-* Search
-* View profile
-* Sale history
-* Payment history
-* Due history
-* Collect due
-
-Show:
-
-* Total purchase
-* Total paid
-* Total due
-
----
-
-# 17. SUPPLIER MANAGEMENT
-
-Supplier fields:
-
-* Name
-* Company
-* Phone
-* Email
-* Address
-* Opening due
-
-Functions:
-
-* Add
-* Edit
-* Search
-* Purchase history
-* Payment history
-* Due history
-* Pay supplier due
-
----
-
-# 18. RETURNS
-
-Implement sales returns.
+Scan Barcode
+↓
+Find Product
+↓
+Add to Cart
+↓
+Calculate Total
+↓
+Payment
+↓
+Complete Sale
+↓
+Decrease Stock
+↓
+Create Stock Movement
+↓
+Generate Invoice
 
 Required:
 
-* Find invoice
-* Select product
-* Return quantity
-* Reason
-* Refund amount
-* Stock adjustment
-* Return history
+Barcode input
 
-Prevent returning more quantity than originally sold.
+Product search
 
-Use transactions.
+Search by name
 
----
+Search by SKU
 
-# 19. EXPENSE MANAGEMENT
+Search by barcode
 
-Expense categories:
+Category filter
 
-* Electricity
-* Rent
-* Transport
-* Salary
-* Repair
-* Other
+Product cards
 
-Fields:
+Product images
 
-* Category
-* Amount
-* Date
-* Note
-* Created by
+Add product
 
-Expenses must be included in net profit.
+Remove product
 
-Formula:
+Increase quantity
 
-Gross Profit = Sales Revenue - Cost of Goods Sold
+Decrease quantity
 
-Net Profit = Gross Profit - Expenses
+Manual quantity
 
----
+Discount
 
-# 20. INVOICE / RECEIPT
+VAT/tax
 
-Invoice must contain:
+Subtotal
 
-* Shop logo
-* Shop name
-* Shop address
-* Shop phone
-* Invoice number
-* Date
-* Time
-* Cashier
-* Customer
-* Product
-* Quantity
-* Unit price
-* Discount
-* VAT
-* Subtotal
-* Total
-* Paid
-* Due
-* Change
+Grand total
 
-Print formats:
+Customer selection
 
-* 58mm thermal
-* 80mm thermal
-* A4
+Cash
 
-Print CSS must print ONLY the invoice/receipt.
+Card
 
-Do NOT print:
+Mobile banking
 
-* Sidebar
-* Dashboard
-* Navigation
-* Buttons
-* Other UI
+Other payment
 
-Functions:
+Paid
 
-* Print
-* Reprint
-* Invoice history
-* View invoice
+Due
 
----
+Change
 
-# 21. HOLD BILL
+Complete Sale
 
-Implement:
+New Sale
 
-* Hold bill
-* Resume bill
-* Delete held bill
+Clear Cart
 
-Each held bill must store its cart data safely.
+Hold Bill
 
----
+Resume Bill
 
-# 22. REPORTS
+Cancel Sale
 
-Create reports for:
+19. SALE TRANSACTION
+Sale completion MUST use a database transaction.
 
-## Sales
+Process:
 
-* Daily
-* Weekly
-* Monthly
-* Custom date
-* Product-wise
-* Category-wise
-* Cashier-wise
-* Customer-wise
+Validate request.
 
-Show:
+Validate cart.
 
-* Total sales
-* Number of transactions
-* Discount
-* VAT
-* Paid
-* Due
-* Profit
+Validate products.
 
-## Purchase
+Validate barcode references.
 
-* Daily
-* Weekly
-* Monthly
-* Supplier-wise
-* Product-wise
+Validate stock.
 
-## Profit
+Lock/check stock where required.
 
-Show clearly:
+Create sale.
 
-Sales revenue
+Create sale items.
 
-COGS
+Decrease stock.
 
-Gross profit
+Create stock movements.
 
-Expenses
+Create payment.
 
-Net profit
+Calculate paid/due/change.
 
-## Stock
+Commit.
 
-* Current stock
-* Low stock
-* Out of stock
-* Stock movement
+If anything fails:
 
-All reports must support filters and pagination where appropriate.
+ROLLBACK
 
----
+Never create half-completed sales.
 
-# 23. SEARCH
+20. PURCHASE TRANSACTION
+Purchase workflow:
 
-Global/appropriate searches:
+Validate purchase.
 
-* Product name
-* SKU
-* Barcode
-* Customer name
-* Customer phone
-* Supplier name
-* Supplier phone
-* Invoice number
-* Date
+Create purchase.
 
-Use indexed database columns where appropriate.
+Create purchase items.
 
----
+Increase stock.
 
-# 24. KEYBOARD SHORTCUTS
+Create stock movements.
 
-Implement:
+Record supplier payment/due.
 
-* F1 → New Sale
-* F2 → Search
-* F4 → Customer
-* F8 → Payment
-* Enter → Complete/confirm where appropriate
-* Esc → Close modal
+Commit transaction.
 
-Do not interfere with normal browser behavior unnecessarily.
+Failure:
 
----
+ROLLBACK
 
-# 25. NOTIFICATIONS
+21. GLASSMORPHISM UI — PRIMARY DESIGN REQUIREMENT
+The application MUST use a modern Glassmorphism UI.
 
-Use animated toast notifications for:
+The UI must NOT look like:
 
-* Success
-* Error
-* Warning
-* Info
+Generic Bootstrap admin panel
 
-Examples:
+Old ERP software
 
-"Product saved successfully."
+Plain HTML CRUD
 
-"Insufficient stock."
+Basic dashboard template
 
-"Barcode already exists."
+The visual direction:
 
-"Sale completed successfully."
-
----
-
-# 26. DATABASE DESIGN
-
-Use normalized relational database design.
-
-Minimum tables:
-
-* users
-* roles
-* permissions
-* role_permissions
-* categories
-* brands
-* products
-* product_barcodes
-* customers
-* suppliers
-* purchases
-* purchase_items
-* sales
-* sale_items
-* returns
-* return_items
-* customer_payments
-* supplier_payments
-* expenses
-* expense_categories
-* stock_movements
-* held_bills
-* activity_logs
-* settings
+Modern
+Premium
+Clean
+Elegant
+Fast
+Professional
+Glassmorphism
+Touch-friendly
 
 Use:
 
-* Foreign keys
-* Indexes
-* Unique constraints
-* Proper data types
-* Timestamps
-* Relationships
+Frosted glass
 
----
+Backdrop blur
 
-# 27. SECURITY
+Semi-transparent surfaces
 
-Security is extremely important.
+Soft borders
 
-Implement Laravel best practices:
+Layered cards
 
-* CSRF protection
-* Password hashing
-* Authorization
-* Policies/Gates
-* Middleware
-* Form Request validation
-* SQL injection protection through Eloquent/query builder
-* XSS-safe output
-* Mass assignment protection
-* Secure sessions
-* Login throttling/rate limiting
-* Proper error handling
-* Activity logging
-* Permission checks on backend
-* Secure file upload validation
-* No sensitive information in Git
+Subtle shadows
 
-Never trust frontend JavaScript for security.
+Gradient backgrounds
 
-Frontend permission hiding is NOT enough.
+Ambient lighting
 
-Backend must enforce permissions.
+Rounded corners
 
----
+Modern typography
 
-# 28. ACTIVITY LOG
+Soft glow
 
-Log important actions:
+Smooth transitions
 
-* Login
-* Logout
-* Product create
-* Product update
-* Product archive/delete
-* Barcode add/delete
-* Purchase
-* Sale
-* Return
-* Expense
-* Customer change
-* Supplier change
-* User creation
-* User update
-* Permission change
-* Backup
-* Restore
+Do NOT overuse effects.
+
+Performance and readability are more important than decoration.
+
+22. GLASS DESIGN SYSTEM
+Create reusable CSS variables.
+
+Example:
+
+:root {
+    --primary: #6366f1;
+    --secondary: #8b5cf6;
+
+    --glass-bg: rgba(255,255,255,.10);
+    --glass-border: rgba(255,255,255,.18);
+    --glass-blur: 18px;
+
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255,255,255,.70);
+}
+
+Values may be adjusted according to the final design.
+
+Create reusable classes/components for:
+
+Glass panels
+
+Glass cards
+
+Glass buttons
+
+Glass inputs
+
+Glass modals
+
+Glass dropdowns
+
+Glass tables
+
+Glass navigation
+
+Glass notifications
+
+Do not duplicate styling unnecessarily.
+
+23. DASHBOARD DESIGN
+Dashboard should include modern glass cards:
+
+Today's Sales
+Today's Profit
+Purchases
+Expenses
+Customers
+Suppliers
+Stock
+Customer Due
+Supplier Due
+
+Use:
+
+Glass cards
+
+Icons
+
+Mini statistics
+
+Charts
+
+Trend indicators
+
+Loading states
+
+Empty states
+
+Charts must match the overall glass design.
+
+24. SIDEBAR
+Glass sidebar:
+
+Logo
+
+Dashboard
+
+POS
+
+Products
+
+Categories
+
+Brands
+
+Barcodes
+
+Purchases
+
+Sales
+
+Returns
+
+Customers
+
+Suppliers
+
+Expenses
+
+Reports
+
+Users
+
+Activity Logs
+
+Backup
+
+Settings
+
+Features:
+
+Active menu indicator
+
+Hover animation
+
+Collapse/expand
+
+Mobile drawer
+
+Smooth transition
+
+25. TOP NAVIGATION
+Glass topbar:
+
+Page title
+
+Search
+
+Notifications
+
+Theme toggle
+
+User profile
+
+User menu
+
+Mobile menu button
+
+Keep it uncluttered.
+
+26. DARK/LIGHT MODE
+Provide:
+
+Light mode
+
+Dark mode
+
+Dark mode must NOT simply invert colors.
+
+Dark mode should use:
+
+Deep background
+
+Translucent glass
+
+Subtle gradients
+
+Proper contrast
+
+Accent colors
+
+Light mode should use:
+
+Light background
+
+White/translucent glass
+
+Soft shadows
+
+Clear text
+
+Persist theme preference after refresh.
+
+27. RESPONSIVE DESIGN
+Support:
+
+Desktop
+
+Laptop
+
+Tablet
+
+Mobile
+
+Do not simply shrink desktop.
+
+Mobile UI should have:
+
+Large touch targets
+
+Easy barcode input
+
+Easy search
+
+Responsive product cards
+
+Accessible cart
+
+Responsive modals
+
+Responsive tables
+
+Bottom action area where useful
+
+POS desktop:
+
+Products: 70%
+Cart: 30%
+
+Mobile:
+
+Products
+↓
+Cart
+↓
+Payment
+
+28. PRODUCT MANAGEMENT
+Product fields:
+
+Product name
+
+Auto-generated SKU
+
+Category
+
+Brand
+
+Unit
+
+Purchase price
+
+Selling price
+
+Wholesale price
+
+Current stock
+
+Minimum stock
+
+Product image
+
+Description
+
+Status
+
+Created date
+
+Updated date
+
+Functions:
+
+Add
+
+Edit
+
+View
+
+Search
+
+Filter
+
+Pagination
+
+Enable
+
+Disable
+
+Archive
+
+Safe delete where appropriate
+
+29. PRODUCT FORM UX
+Product creation form should include:
+
+Product Image
+Image Preview
+
+Product Name
+Category
+Brand
+Unit
+
+SKU
+[Auto Generated / Read Only]
+
+Purchase Price
+Selling Price
+Wholesale Price
+
+Current Stock
+Minimum Stock
+
+Description
+Status
+
+SKU should automatically appear after the required information is entered or when the product is saved, depending on the implementation.
+
+The user should not need to manually create the SKU.
+
+30. PRODUCT IMAGE UX
+Use a modern glass image upload component.
+
+Example:
+
+┌─────────────────────────────┐
+│                             │
+│       Product Image         │
+│                             │
+│      Drag & Drop Here       │
+│            or               │
+│        Choose Image         │
+│                             │
+└─────────────────────────────┘
+
+After selection:
+
+┌─────────────────────────────┐
+│                             │
+│       [Image Preview]       │
+│                             │
+│ Replace     Remove          │
+└─────────────────────────────┘
+
+Provide immediate preview using JavaScript.
+
+The preview is only UX.
+
+Server-side validation remains mandatory.
+
+31. AUTHENTICATION
+Implement:
+
+Login
+
+Logout
+
+Password hashing
+
+Session regeneration
+
+Secure sessions
+
+CSRF
+
+Login validation
+
+Login throttling/rate limiting
+
+Unauthorized protection
+
+Remember me where appropriate
+
+Never store plaintext passwords.
+
+Login page should also follow the Glassmorphism design.
+
+32. USERS & PERMISSIONS
+Admin:
+
+Create cashier
+
+Edit cashier
+
+Disable cashier
+
+Enable cashier
+
+Archive/delete safely
+
+Reset password
+
+Manage permissions
+
+View activity logs
+
+Cashier permissions can include:
+
+POS
+
+Product search
+
+Customer access
+
+Sale
+
+Hold bill
+
+Return
+
+Discount
+
+Reports
+
+Invoice printing
+
+Backend authorization is mandatory.
+
+A cashier must not bypass permissions by manually entering URLs.
+
+33. ROLES & PERMISSIONS
+Create:
+
+users
+roles
+permissions
+role_permissions
+
+Use:
+
+Middleware
+
+Policies
+
+Gates
+
+Never rely on frontend permission hiding.
+
+34. DASHBOARD
+Show:
+
+Today's sales
+
+Today's profit
+
+Today's purchases
+
+Today's expenses
+
+Total products
+
+Total stock
+
+Total customers
+
+Total suppliers
+
+Customer due
+
+Supplier due
+
+Low stock
+
+Out of stock
+
+Recent sales
+
+Charts:
+
+Daily sales
+
+Weekly sales
+
+Monthly sales
+
+Profit
+
+Purchases
+
+Expenses
+
+Category-wise sales
+
+Filters:
+
+Today
+
+Yesterday
+
+This week
+
+This month
+
+Custom range
+
+35. PROFIT
+Use:
+
+Gross Profit =
+Sales Revenue - Cost of Goods Sold
+
+And:
+
+Net Profit =
+Gross Profit - Expenses
+
+Never confuse Revenue and Profit.
+
+36. CUSTOMERS
+Fields:
+
+Name
+
+Phone
+
+Email
+
+Address
+
+Opening due
+
+Status
+
+Functions:
+
+Add
+
+Edit
+
+Search
+
+Profile
+
+Sale history
+
+Payment history
+
+Due history
+
+Collect due
+
+37. SUPPLIERS
+Fields:
+
+Name
+
+Company
+
+Phone
+
+Email
+
+Address
+
+Opening due
+
+Functions:
+
+Add
+
+Edit
+
+Search
+
+Purchase history
+
+Payment history
+
+Due history
+
+Pay supplier due
+
+38. RETURNS
+Implement sales returns.
+
+Workflow:
+
+Find Invoice
+↓
+Select Product
+↓
+Enter Return Quantity
+↓
+Validate Sold Quantity
+↓
+Validate Already Returned Quantity
+↓
+Reason
+↓
+Refund
+↓
+Increase Stock
+↓
+Stock Movement
+↓
+Commit
+
+Never allow excessive returns.
+
+Use transactions.
+
+39. EXPENSE MANAGEMENT
+Categories:
+
+Electricity
+
+Rent
+
+Transport
+
+Salary
+
+Repair
+
+Other
+
+Fields:
+
+Category
+
+Amount
+
+Date
+
+Note
+
+Created by
+
+Expenses affect net profit.
+
+40. INVOICE / RECEIPT
+Include:
+
+Shop logo
+
+Shop name
+
+Address
+
+Phone
+
+Invoice number
+
+Date
+
+Time
+
+Cashier
+
+Customer
+
+Product
+
+Product image where appropriate
+
+SKU
+
+Quantity
+
+Unit price
+
+Discount
+
+VAT
+
+Subtotal
+
+Total
+
+Paid
+
+Due
+
+Change
+
+Formats:
+
+58mm
+
+80mm
+
+A4
+
+Print CSS must print only the invoice.
+
+Do not print:
+
+Sidebar
+
+Dashboard
+
+Navigation
+
+Buttons
+
+Unrelated UI
+
+41. HOLD BILL
+Implement:
+
+Hold
+
+Resume
+
+Delete
+
+Store held cart data safely.
+
+42. REPORTS
+Sales:
+
+Daily
+
+Weekly
+
+Monthly
+
+Custom
+
+Product-wise
+
+Category-wise
+
+Cashier-wise
+
+Customer-wise
+
+Purchases:
+
+Daily
+
+Weekly
+
+Monthly
+
+Supplier-wise
+
+Product-wise
+
+Profit:
+
+Sales Revenue
+COGS
+Gross Profit
+Expenses
+Net Profit
+
+Stock:
+
+Current stock
+
+Low stock
+
+Out of stock
+
+Stock movement
+
+43. SEARCH
+Search by:
+
+Product name
+
+SKU
+
+Barcode
+
+Customer name
+
+Customer phone
+
+Supplier name
+
+Supplier phone
+
+Invoice number
+
+Date
+
+Use database indexes.
+
+Optimize barcode/SKU lookup.
+
+44. KEYBOARD SHORTCUTS
+Implement:
+
+F1 → New Sale
+F2 → Search
+F4 → Customer
+F8 → Payment
+Enter → Confirm where appropriate
+Esc → Close modal
+
+Do not unnecessarily interfere with browser behavior.
+
+45. NOTIFICATIONS
+Use Glassmorphism toast notifications.
+
+Types:
+
+Success
+
+Error
+
+Warning
+
+Info
+
+Examples:
+
+Product saved successfully.
+Product image uploaded successfully.
+Insufficient stock.
+Barcode already exists.
+Sale completed successfully.
+SKU generated successfully.
+Purchase completed successfully.
+
+46. DATABASE TABLES
+Minimum:
+
+users
+roles
+permissions
+role_permissions
+
+categories
+brands
+products
+product_barcodes
+
+customers
+suppliers
+
+purchases
+purchase_items
+
+sales
+sale_items
+
+returns
+return_items
+
+customer_payments
+supplier_payments
+
+expenses
+expense_categories
+
+stock_movements
+
+held_bills
+activity_logs
+settings
+
+Use:
+
+Foreign keys
+
+Indexes
+
+Unique constraints
+
+Appropriate decimal types
+
+Timestamps
+
+Soft deletes where appropriate
+
+47. PRODUCTS TABLE
+Suggested:
+
+id
+category_id
+brand_id
+sku
+name
+unit
+purchase_price
+selling_price
+wholesale_price
+current_stock
+minimum_stock
+image
+description
+status
+created_at
+updated_at
+deleted_at
+
+Constraints:
+
+sku UNIQUE
+sku NOT NULL
+
+48. PRODUCT BARCODES TABLE
+Suggested:
+
+id
+product_id
+barcode
+is_primary
+created_at
+updated_at
+
+Constraint:
+
+barcode UNIQUE
+
+Relationship:
+
+Product hasMany ProductBarcode
+ProductBarcode belongsTo Product
+
+49. IMAGE STORAGE SECURITY
+Uploaded product images must be validated server-side.
+
+Protect against:
+
+Malicious files
+
+Executable uploads
+
+Incorrect MIME types
+
+Oversized files
+
+Unsafe filenames
+
+Path traversal
+
+Arbitrary file access
+
+Do not allow PHP/executable files to be uploaded as product images.
+
+Use Laravel filesystem/storage best practices.
+
+50. MONEY & QUANTITY
+Use appropriate decimal types for financial values.
+
+Example:
+
+DECIMAL(15,2)
+
+Do not use floating-point arithmetic carelessly for money.
+
+Quantity type should support the shop's required units.
+
+If fractional quantities are needed, use an appropriate decimal type.
+
+51. SECURITY
+Implement:
+
+CSRF
+
+Password hashing
+
+Authorization
+
+Policies/Gates
+
+Middleware
+
+Form Requests
+
+Eloquent/query builder
+
+XSS-safe Blade output
+
+Mass assignment protection
+
+Secure sessions
+
+Login throttling
+
+Secure uploads
+
+Activity logs
+
+Secure error handling
+
+Never trust frontend JavaScript.
+
+Never expose:
+
+Passwords
+
+API keys
+
+Database credentials
+
+Private credentials
+
+Never commit .env.
+
+52. ACTIVITY LOG
+Log:
+
+Login
+
+Logout
+
+Product creation
+
+Product update
+
+Product archive
+
+Product image upload/change/delete
+
+Barcode add
+
+Barcode delete
+
+Purchase
+
+Sale
+
+Return
+
+Expense
+
+Customer change
+
+Supplier change
+
+User creation
+
+User update
+
+Permission change
+
+Backup
+
+Restore
+
+Stock adjustment
 
 Store:
 
-* User
-* Action
-* Related record
-* IP
-* Description
-* Date/time
+User
 
----
+Action
 
-# 29. BACKUP / RESTORE
+Related record
 
+IP
+
+Description
+
+Timestamp
+
+53. BACKUP / RESTORE
 Admin-only.
 
 Functions:
 
-* Create database backup
-* Download backup
-* Restore backup
-* Validate backup
-* Log backup action
-* Log restore action
+Create database backup
 
-Do not expose backup/restore to cashier.
+Download backup
 
-Never store production credentials in Git.
+Restore backup
 
----
+Validate backup
 
-# 30. SETTINGS
+Log backup
 
+Log restore
+
+Cashiers must never have access.
+
+54. SETTINGS
 Settings:
 
-* Shop name
-* Logo
-* Address
-* Phone
-* Email
-* Tax/VAT
-* Invoice prefix
-* Invoice format
-* Currency
-* Theme
-* Receipt settings
-* Backup settings
+Shop name
 
----
+Shop logo
 
-# 31. CODE ARCHITECTURE
+Address
 
-Keep code clean.
+Phone
 
+Email
+
+Tax/VAT
+
+Invoice prefix
+
+Invoice format
+
+Currency
+
+Theme
+
+Receipt settings
+
+Backup settings
+
+SKU settings
+
+55. CODE ARCHITECTURE
 Use:
 
-* Controllers
-* Models
-* Form Requests
-* Policies
-* Middleware
-* Services where business logic becomes complex
-* Blade components
-* Migrations
-* Seeders
+Controllers
 
-Do NOT put the entire application inside one controller or one Blade file.
+Models
 
-Avoid giant JavaScript files.
+Form Requests
 
-Organize CSS and JS logically.
+Policies
 
----
+Middleware
 
-# 32. GIT
+Services
 
-Project must be Git-friendly.
+Blade components
 
+Migrations
+
+Seeders
+
+Use Services when business logic becomes complex.
+
+Avoid:
+
+Giant controllers
+
+Giant Blade files
+
+Giant JavaScript files
+
+Duplicate business logic
+
+56. GIT
 Include:
 
-* `.gitignore`
-* `.env.example`
-* README
-* Clear folder structure
+.gitignore
+.env.example
+README.md
 
 Never commit:
 
-* `.env`
-* passwords
-* API keys
-* production database
-* private credentials
+.env
+passwords
+API keys
+production database
+private credentials
 
-Use meaningful commits, for example:
+Example commits:
 
-```text
-feat: add product management
+feat: add automatic sku generation
+feat: add product image upload
 feat: add multiple barcode system
+feat: add automatic stock management
 feat: add purchase workflow
 feat: add POS checkout
+feat: add glassmorphism design system
 fix: prevent negative stock
-fix: validate duplicate barcode
+fix: prevent duplicate barcode
+fix: secure product image upload
 security: enforce cashier permissions
-```
 
----
-
-# 33. DEMO DATA
-
-Seeder should create:
+57. DEMO DATA
+Create:
 
 Admin:
-
-```text
 admin@example.com
 password
-```
 
 Cashier:
-
-```text
 cashier@example.com
 password
-```
 
-Also create:
+Also seed:
 
-* Demo categories
-* Demo brands
-* Demo products
-* Multiple barcodes
-* Demo customers
-* Demo suppliers
-* Demo purchase
-* Demo sales
+Categories
+
+Brands
+
+Products
+
+Auto-generated SKUs
+
+Product images where appropriate
+
+Multiple barcodes
+
+Customers
+
+Suppliers
+
+Purchases
+
+Sales
+
+Stock movements
 
 Clearly warn that demo passwords must be changed.
 
----
+58. DEVELOPMENT PHASES
+Phase 1:
+Laravel + XAMPP MySQL setup
 
-# 34. DEVELOPMENT METHOD
-
-Build the project in phases.
-
-## Phase 1
-
-Laravel + MySQL + XAMPP setup
-
-## Phase 2
-
+Phase 2:
 Authentication
 
-## Phase 3
-
+Phase 3:
 Roles & permissions
 
-## Phase 4
+Phase 4:
+Glassmorphism UI design system
 
-Responsive animated UI
+Phase 5:
+Products/categories/brands + automatic SKU
 
-## Phase 5
+Phase 6:
+Product image upload/storage/preview
 
-Products/categories/brands
-
-## Phase 6
-
+Phase 7:
 Multiple/bulk barcode system
 
-## Phase 7
+Phase 8:
+Purchases + automatic stock increase
 
-Purchases + stock
+Phase 9:
+POS + automatic stock decrease
 
-## Phase 8
-
-POS + sales + payments
-
-## Phase 9
-
+Phase 10:
 Invoices + printing
 
-## Phase 10
-
+Phase 11:
 Customers + due
 
-## Phase 11
-
+Phase 12:
 Suppliers + due
 
-## Phase 12
+Phase 13:
+Returns + stock restoration
 
-Returns
-
-## Phase 13
-
+Phase 14:
 Expenses + profit
 
-## Phase 14
+Phase 15:
+Reports + dashboard
 
-Reports + dashboard charts
-
-## Phase 15
-
+Phase 16:
 Hold/resume bills + shortcuts
 
-## Phase 16
-
+Phase 17:
 Backup/restore + activity logs
 
-## Phase 17
-
+Phase 18:
 Security audit
 
-## Phase 18
-
+Phase 19:
 Responsive/mobile/tablet optimization
 
-## Phase 19
-
+Phase 20:
 Performance optimization
 
-## Phase 20
+Phase 21:
+Final QA
 
-Final QA/testing
+59. DEVELOPMENT RULE
+When implementing any feature:
 
----
+Inspect the existing project.
 
-# 35. IMPORTANT DEVELOPMENT RULE
+Understand existing database structure.
 
-Do NOT simply give me an architecture or explanation.
+Preserve working functionality.
 
-Actually create/update the code.
+Implement the requested feature.
 
-When I ask for a feature:
+Update migrations/models/controllers/routes/views/JS/CSS as required.
 
-1. Inspect the existing project structure.
-2. Preserve existing working features.
-3. Implement the requested feature.
-4. Update migrations/models/controllers/routes/views/JS/CSS as required.
-5. Check database relationships.
-6. Check security.
-7. Check responsive behavior.
-8. Check for errors.
-9. Tell me exactly which files changed.
-10. Give me the updated ZIP when appropriate.
+Check relationships.
 
-Never silently remove an existing feature.
+Check validation.
 
----
+Check authorization.
 
-# 36. ZIP PROJECT AUDIT MODE
+Check transactions.
 
-Later I may upload the complete Laravel project ZIP.
+Check stock integrity.
 
+Check image upload/storage security.
+
+Check responsive behavior.
+
+Check Glassmorphism UI consistency.
+
+Check errors.
+
+Run appropriate tests/checks.
+
+Tell me exactly which files changed.
+
+Never claim a feature is complete if it is only scaffolded.
+
+60. AUDIT MODE
 When I say:
 
-"AUDIT THIS PROJECT AGAINST THE MASTER POS REQUIREMENTS"
+AUDIT THIS PROJECT AGAINST THE MASTER POS REQUIREMENTS
 
-you must inspect the ACTUAL project files.
+Inspect the ACTUAL project files.
 
-Do NOT assume that a feature exists because a route, button, table, or comment exists.
+Do not assume functionality exists because:
+
+Route exists
+
+Button exists
+
+Table exists
+
+Comment exists
+
+Blade page exists
 
 Verify actual implementation.
 
-Create a checklist:
+Create:
 
-| Requirement | Status | Evidence/File | Problem | Required Fix |
-| ----------- | ------ | ------------- | ------- | ------------ |
+Requirement	Status	Evidence/File	Problem	Required Fix
 
 Statuses:
 
-* PASS
-* PARTIAL
-* MISSING
-* BROKEN
+PASS
+PARTIAL
+MISSING
+BROKEN
 
-Check every requirement from this master prompt.
+Check:
 
-Also check:
+Database
 
-* Database
-* Routes
-* Controllers
-* Models
-* Middleware
-* Policies
-* Validation
-* Blade
-* CSS
-* JavaScript
-* Security
-* Transactions
-* Permissions
-* Mobile responsiveness
-* Printing
-* Barcode workflow
-* Stock consistency
-* Reports
-* Backup
-* Activity logs
+Migrations
 
-Do NOT modify the project during audit unless I explicitly say:
+Models
 
-"FIX ALL ISSUES"
+Relationships
 
----
+Routes
 
-# 37. FIX ALL ISSUES MODE
+Controllers
 
-If I say:
+Services
 
-"FIX ALL ISSUES"
+Middleware
 
-then:
+Policies
 
-1. Fix every MISSING/PARTIAL/BROKEN requirement that can be implemented.
-2. Preserve existing working features.
-3. Do not rewrite unnecessarily.
-4. Do not introduce duplicate tables/routes/features.
-5. Run appropriate tests/checks.
-6. Check migrations and relationships.
-7. Check security.
-8. Check responsive UI.
-9. Re-audit after fixing.
-10. Give me a final report.
+Validation
 
----
+Blade
 
-# 38. QUALITY STANDARD
+CSS
 
+JavaScript
+
+Authentication
+
+Authorization
+
+Transactions
+
+Stock consistency
+
+Automatic SKU
+
+Multiple barcode
+
+Product images
+
+Image security
+
+POS
+
+Purchases
+
+Returns
+
+Reports
+
+Printing
+
+Responsive UI
+
+Glassmorphism design
+
+Backup
+
+Activity logs
+
+Security
+
+Performance
+
+Do NOT modify during audit unless explicitly instructed:
+
+FIX ALL ISSUES
+
+61. FIX ALL ISSUES MODE
+When I say:
+
+FIX ALL ISSUES
+
+Then:
+
+Fix every MISSING/PARTIAL/BROKEN requirement that can be implemented.
+
+Preserve existing working features.
+
+Avoid unnecessary rewrites.
+
+Do not create duplicate tables/routes/features.
+
+Fix database relationships.
+
+Fix authorization.
+
+Fix validation.
+
+Fix transactions.
+
+Fix stock integrity.
+
+Fix automatic SKU.
+
+Fix barcode logic.
+
+Fix product image upload/storage/security.
+
+Fix responsive UI.
+
+Fix Glassmorphism inconsistencies.
+
+Run appropriate tests/checks.
+
+Re-audit after fixing.
+
+Provide a final report.
+
+62. QUALITY STANDARD
 The final application should feel like a real commercial retail POS.
 
-Priorities:
+Priority:
 
-1. Correctness
-2. Security
-3. Data integrity
-4. Speed
-5. Usability
-6. Responsive design
-7. Professional UI
-8. Maintainable code
-9. Git compatibility
-10. Easy future development
+Correctness
+
+Security
+
+Data integrity
+
+Stock accuracy
+
+Speed
+
+Usability
+
+Responsive design
+
+Professional Glassmorphism UI
+
+Product image quality/performance
+
+Maintainable code
+
+Git compatibility
+
+Future extensibility
 
 Never claim something is complete when it is only a scaffold.
 
-Clearly label:
+Always clearly label:
 
-* Completed
-* Partial
-* Missing
-* Bug
-* Not tested
+Completed
+Partial
+Missing
+Bug
+Not Tested
 
----
+63. FINAL PRODUCT FLOW
+The main product relationship must work like this:
 
-# 39. CURRENT PROJECT ENVIRONMENT
+                    PRODUCT
+                       │
+        ┌──────────────┼───────────────┐
+        │              │               │
+      Image          Auto SKU        Stock
+        │              │               │
+  oil-1l.webp      OIL-000001       100
+                                      │
+                         ┌────────────┼────────────┐
+                         │            │            │
+                      Purchase       Sale        Return
+                         +            -             +
 
-My environment:
+And:
 
-```text
-OS: Windows
-Server: XAMPP
-Web server: Apache
-Database: MySQL
-Backend: Laravel/PHP
-Frontend: Blade + HTML + CSS + Vanilla JavaScript
-Version control: Git
-```
+Product
+│
+├── Image
+│
+├── SKU
+│
+├── Price
+│
+├── Stock
+│
+└── Multiple Barcodes
+       ├── Barcode 1
+       ├── Barcode 2
+       └── Barcode 3
 
-Project folder:
+POS workflow:
 
-```text
-C:\xampp\htdocs\retail-pos
-```
+Scan Barcode
+↓
+Find Product
+↓
+Show Product Image
+↓
+Show Product Name
+↓
+Show SKU
+↓
+Show Price
+↓
+Add to Cart
+↓
+Validate Stock
+↓
+Complete Sale
+↓
+Automatically Decrease Stock
+↓
+Create Stock Movement
+↓
+Generate Invoice
 
-Database:
+SKU remains unchanged.
 
-```text
-retail_pos
-```
+64. FINAL UI REQUIREMENT
+Every page must follow the same modern Glassmorphism design language.
 
----
+Required visual characteristics:
 
-# 40. FINAL INSTRUCTION
+Premium
 
+Modern
+
+Clean
+
+Professional
+
+Responsive
+
+Touch-friendly
+
+Fast
+
+Accessible
+
+Consistent
+
+Product images must integrate naturally into the Glassmorphism cards.
+
+Example:
+
+┌────────────────────────────────┐
+│                                │
+│       PRODUCT IMAGE             │
+│       inside glass card         │
+│                                │
+├────────────────────────────────┤
+│ A Company Oil 1L               │
+│ OIL-000001                     │
+│                                │
+│ ৳180              Stock: 100  │
+│                                │
+│        + Add to Cart           │
+└────────────────────────────────┘
+
+Do not sacrifice performance for visual effects.
+
+Use optimized images and efficient CSS.
+
+65. MASTER RULE
 Treat this entire document as the MASTER REQUIREMENTS SPECIFICATION.
 
 Every future development request must be checked against this specification.
 
 Do not forget previously implemented requirements.
 
-Do not remove old functionality without telling me.
+Do not remove existing functionality without informing me.
 
 If a requested feature conflicts with an existing requirement, explain the conflict and propose a safe implementation.
 
-If information is missing, ask me before making a risky assumption.
+If information is missing and the decision could affect:
 
-Build the application step-by-step until it becomes a complete, secure, professional Retail POS system.
+Data integrity
+
+Security
+
+Existing functionality
+
+Stock accuracy
+
+Financial calculations
+
+ask before making a risky assumption.
+
+Build the application step-by-step until it becomes a complete, secure, fast, responsive, professional Retail POS system with:
+
+XAMPP MySQL
++
+Automatic SKU
++
+Multiple Barcode
++
+Product Image Upload
++
+Image Preview
++
+Secure Image Storage
++
+POS Product Images
++
+Automatic Stock Management
++
+POS
++
+Sales
++
+Purchases
++
+Returns
++
+Customers
++
+Suppliers
++
+Expenses
++
+Profit
++
+Reports
++
+Invoices
++
+Permissions
++
+Security
++
+Activity Logs
++
+Backup/Restore
++
+Responsive UI
++
+Dark/Light Mode
++
+Professional Glassmorphism Design
+
+================================================================================
+UPDATED REQUIREMENTS — UI + USER / ROLE / PERMISSION CHANGES
+================================================================================
+
+The original Master Requirements above remain the SOURCE OF TRUTH. The following
+updates are additions/clarifications and must be applied together with all original
+requirements. Do not remove any original requirement unless explicitly instructed.
+
+1. UI / DESIGN UPDATE
+---------------------
+The complete application must use a premium modern DARK 3D GLASSMORPHISM design.
+
+Visual direction:
+- Premium dark/near-black background
+- Frosted glass surfaces
+- Semi-transparent panels
+- Soft borders
+- Large rounded corners
+- Layered cards
+- Subtle 3D depth
+- Soft shadows
+- Subtle glow/accent lighting
+- Modern typography
+- Clean spacing
+- Smooth hover/click transitions
+- Professional animations
+- Touch-friendly controls
+- Responsive desktop/tablet/mobile layout
+
+The application must NOT look like a generic Bootstrap admin panel, old ERP,
+plain CRUD application, or basic dashboard template.
+
+Use one consistent design system throughout Dashboard, POS, Products, Purchases,
+Sales, Customers, Suppliers, Expenses, Reports, Users, Roles, Settings and all
+other pages.
+
+Keep animations smooth and professional. Do not overuse effects or sacrifice
+performance/readability for decoration.
+
+2. SIDEBAR / TOPBAR
+-------------------
+Use a modern glass sidebar and topbar.
+
+Sidebar should include, where permitted by the logged-in user's permissions:
+- Dashboard
+- POS
+- Products
+- Categories
+- Brands
+- Barcodes
+- Purchases
+- Sales
+- Returns
+- Customers
+- Suppliers
+- Expenses
+- Reports
+- Users
+- Roles & Permissions
+- Activity Logs
+- Backup
+- Settings
+
+Sidebar requirements:
+- Active menu indicator
+- Hover effect
+- Collapse/expand on desktop where appropriate
+- Mobile drawer
+- Smooth transition
+
+Topbar should include:
+- Page title
+- Search where appropriate
+- Notifications
+- Theme toggle
+- User profile/menu
+- Mobile menu button
+
+Keep the topbar clean and uncluttered.
+
+3. DARK / LIGHT MODE
+--------------------
+Keep both Light Mode and Dark Mode.
+
+Theme must:
+- Persist after refresh
+- Persist for the user's preference
+- Use CSS variables/reusable design tokens
+- Maintain readable contrast
+- Remain visually consistent across every page
+
+Dark mode should use deep backgrounds, translucent glass surfaces, subtle
+gradients/glows and proper contrast.
+
+Light mode should use light backgrounds, translucent/white glass surfaces and
+soft shadows.
+
+4. POS UI UPDATE
+----------------
+Desktop POS layout should approximately use:
+- 70% products/search area
+- 30% cart/payment area
+
+Mobile POS should follow:
+Products -> Cart -> Payment
+
+POS must remain fast, touch-friendly and easy for a cashier to operate.
+
+IMPORTANT PRODUCT VISUAL RULE:
+Do NOT make product images or fancy product-image cards the main focus of the
+new visual design. Product information should remain clean, compact and functional.
+Product image functionality from the original Master Requirements must still be
+supported in the backend/storage and wherever explicitly required, but the UI
+should not be dominated by large product image cards.
+
+5. COMPLETE USER MANAGEMENT
+---------------------------
+Implement a complete User Management module.
+
+Admin must be able to:
+- Add user
+- Edit user
+- View users
+- Search users
+- Filter users
+- Activate user
+- Deactivate user
+- Change password
+- Reset password
+- Delete/archive user safely
+- Assign a role
+
+User list should show at least:
+- Name
+- Email
+- Role
+- Status
+- Created date
+- Actions
+
+Create a proper Add User form and Edit User form using the same glass UI system.
+
+6. ROLES
+--------
+The system must NOT be limited to only Admin and Cashier.
+
+Default roles should include:
+- Admin
+- Manager
+- Cashier
+- Sales Staff
+
+Admin must be able to create custom roles.
+
+Role management must support:
+- Create role
+- Edit role
+- Delete role where safe
+- View role
+- Assign permissions
+
+Do not allow deletion of a critical role if doing so would break authorization or
+remove the only administrator without a safe replacement.
+
+7. PERMISSIONS
+--------------
+Create a complete role/permission system.
+
+At minimum, permissions should cover:
+- Dashboard
+- POS
+- Products
+- Categories
+- Brands
+- Barcodes
+- Purchases
+- Sales
+- Returns
+- Customers
+- Suppliers
+- Expenses
+- Reports
+- Users
+- Roles
+- Activity Logs
+- Backup
+- Settings
+
+Permissions must be configurable per role.
+
+Example:
+A Cashier may have POS, Product Search, Customer Access, Sales, Hold Bill and
+Invoice Printing, but may not have Users, Roles, Backup or Settings unless an
+Admin explicitly grants those permissions.
+
+8. BACKEND AUTHORIZATION IS MANDATORY
+-------------------------------------
+Never rely only on hiding menu items.
+
+Every sensitive route and action must be protected server-side using appropriate
+Laravel middleware, Policies, Gates or an equivalent robust authorization layer.
+
+Example:
+If a Cashier does not have Users permission, directly opening /users or manually
+entering a protected URL must still return an authorization error/redirect.
+
+The same protection applies to:
+- User creation/edit/delete
+- Role management
+- Permission changes
+- Backup/restore
+- Settings
+- Stock adjustments
+- Financial actions
+- Other sensitive operations
+
+9. ADMIN SAFETY
+---------------
+Protect the primary/last active administrator from accidental deletion,
+demotion or permission removal.
+
+There must always be a safe administrator path for managing the system.
+
+10. DATABASE / ROLE MODEL
+-------------------------
+Use proper normalized relationships. The implementation may use the original
+Master Requirements' role_permissions structure or an equivalent normalized
+many-to-many structure, but it must support:
+
+User -> Role(s) as designed
+Role -> Permissions
+Permission -> Role(s)
+
+Use foreign keys, unique constraints and indexes appropriately.
+
+Do not create duplicate role/permission systems if one already exists in the
+project. Inspect and extend the existing implementation safely.
+
+11. DEFAULT DEMO USERS / ROLES
+------------------------------
+Seed useful demo roles and users for development/testing.
+
+Default roles:
+- Admin
+- Manager
+- Cashier
+- Sales Staff
+
+Example development credentials may be:
+
+Admin:
+admin@example.com
+password
+
+Manager:
+manager@example.com
+password
+
+Cashier:
+cashier@example.com
+password
+
+Sales Staff:
+sales@example.com
+password
+
+Clearly label these as DEMO credentials and require changing them in real use.
+
+12. USER / ROLE UI
+------------------
+Create a dedicated modern glass interface for:
+
+Users:
+- User list
+- Add user
+- Edit user
+- User status
+- Role assignment
+- Password management
+- Search/filter
+
+Roles & Permissions:
+- Role list
+- Add role
+- Edit role
+- Delete role where safe
+- Permission checklist/grouping
+- Save permissions
+
+Example permission UI:
+
+Role: Manager
+
+[ ] Dashboard
+[ ] POS
+[ ] Products
+[ ] Categories
+[ ] Brands
+[ ] Barcodes
+[ ] Purchases
+[ ] Sales
+[ ] Returns
+[ ] Customers
+[ ] Suppliers
+[ ] Expenses
+[ ] Reports
+[ ] Users
+[ ] Roles
+[ ] Activity Logs
+[ ] Backup
+[ ] Settings
+
+Use clear grouping and readable controls.
+
+13. SECURITY FOR USERS / ROLES
+------------------------------
+All user, role and permission changes must:
+- Validate input server-side
+- Respect authorization
+- Use secure password hashing
+- Protect against mass assignment
+- Use CSRF protection
+- Be logged in Activity Logs where appropriate
+
+14. PRESERVE ALL ORIGINAL REQUIREMENTS
+--------------------------------------
+The following original requirements MUST remain active even though the UI and
+role system have been updated:
+
+- Laravel + XAMPP MySQL
+- Automatic server-side unique SKU
+- Stable/immutable SKU
+- Product management
+- Product image upload/storage/preview/replace/remove/default placeholder
+- Secure image validation/storage
+- Multiple unique barcodes per product
+- USB/manual barcode scanning
+- Barcode search/delete/primary/bulk generation/printing
+- Purchase stock increase
+- Sale stock decrease
+- Sales returns restore stock
+- Purchase returns decrease stock
+- Stock adjustment
+- Stock movements
+- Negative stock protection
+- Database transactions and locking where required
+- POS barcode/name/SKU search
+- Quantity/discount/VAT/subtotal/grand total
+- Customer selection
+- Cash/card/mobile/other payment
+- Paid/due/change
+- Complete/New/Clear/Hold/Resume/Cancel sale
+- Purchase transactions
+- Supplier payment/due
+- Customer due/payment history
+- Returns
+- Expenses
+- Profit calculations
+- Invoices/receipts/printing
+- Dashboard and reports
+- Search
+- Keyboard shortcuts
+- Notifications/toasts
+- Activity logs
+- Backup/restore
+- Settings
+- Authentication/security
+- Responsive desktop/tablet/mobile design
+- Light/dark mode
+- Glassmorphism design system
+- Git-friendly architecture
+- Demo/seed data
+- Audit mode
+- Fix-all-issues mode
+- Truthful status reporting
+
+15. DEVELOPMENT / AUDIT RULE
+----------------------------
+Before modifying the project:
+1. Inspect the actual project.
+2. Inspect its database structure/migrations.
+3. Inspect routes, controllers, models, middleware, policies, views, JS and CSS.
+4. Identify what is already implemented.
+5. Identify what is missing, partial or broken.
+6. Preserve working functionality.
+7. Implement the requested features.
+8. Test relevant flows.
+9. Re-audit after changes.
+
+Do not claim a feature is complete merely because a page, route, button or table
+exists.
+
+A feature is COMPLETED only when its database, backend, validation,
+authorization, business logic and UI work together correctly.
+
+Always report:
+- Completed
+- Partial
+- Missing
+- Bug
+- Not Tested
+
+16. FINAL PRODUCT TARGET
+------------------------
+The final product should be a real commercial-quality Laravel Retail POS system
+with a premium modern dark 3D Glassmorphism UI and a complete configurable
+User + Role + Permission system.
+
+The UI should be beautiful, but correctness, security, stock accuracy, financial
+accuracy, authorization, performance and maintainability are more important than
+decoration.
+
+Never silently remove an original feature.
+Never create fake buttons.
+Never create placeholder functionality where real functionality is required.
+Never replace Laravel/MySQL with another stack.
+
+This section is an UPDATE to the original Master Requirements, not a replacement
+for them.
+================================================================================
+END OF MASTER REQUIREMENTS + UPDATED REQUIREMENTS
+================================================================================
